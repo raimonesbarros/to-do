@@ -1,0 +1,25 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 4rem 1.5rem;
+}
+
+.empty img {
+  width: 3.5rem;
+}
+
+.empty p {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gray300);
+  text-align: center;
+}
+
+.empty p span {
+  display: block;
+  font-weight: 400;
+}

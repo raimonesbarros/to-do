@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --gray100: #f2f2f2;
+  --gray200: #d9d9d9;
+  --gray300: #808080;
+  --gray400: #333333;
+  --gray500: #262626;
+  --gray600: #1a1a1a;
+  --gray700: #0d0d0d;
+
+  --danger: #e25858;
+
+  --purple: #8284fa;
+  --purple-dark: #5e60ce;
+
+  --blue: #4ea8de;
+  --blue-dark: #1e6f9f;
+}
+
+body {
+  background-color: var(--gray600);
+}
+
+body,
+input,
+textarea,
+button {
+  font-family: "Inter", sans-serif;
+  line-height: 1, 4rem;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+button,
+a,
+input[type="checkbox"],
+input[type="radius"] {
+  cursor: pointer;
+}
