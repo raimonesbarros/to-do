@@ -12,6 +12,10 @@
 
 ### To view the project
 
+[Clique aqui 🔗](https://raimones-to-do.vercel.app/)
+
+or
+
 ° Download or clone the repository on your machine.
 
 ° Open the terminal in the project directory and run:
@@ -20,7 +24,7 @@
 
 or
 
-`$ yarn`
+`$ yarn add`
 
 Then:
 
