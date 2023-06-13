@@ -25,6 +25,7 @@
   max-width: 46rem;
 
   margin: auto;
+  padding: 0.5rem;
 }
 
 /* New Tasks */
@@ -35,6 +36,7 @@
   gap: 8px;
 
   margin: -1.6875rem auto 0;
+
 }
 
 .task input {
@@ -79,4 +81,14 @@
 
 .task button img {
   width: 1rem;
+}
+
+@media screen and (width<=425px) {
+  .task {
+    flex-direction: column;
+  }
+
+  .task button {
+    width: 50%;
+  }
 }
