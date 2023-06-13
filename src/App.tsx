@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./App.module.css";
 import { TaskList } from "./components/TaskList/TaskList.tsx";
+import rocket from './assets/rocket.svg'
+import plus from './assets/plus.svg'
 
 export interface TaskType {
   id: string;
@@ -39,7 +41,7 @@ export function App() {
   return (
     <div className={styles.app}>
       <header className={styles.header}>
-        <img src="./src/assets/rocket.svg" />
+        <img src={rocket} />
         <h1>
           to<span>do</span>
         </h1>
@@ -59,7 +61,7 @@ export function App() {
             disabled={isValidTask}
           >
             Criar
-            <img src="./src/assets/plus.svg" />
+            <img src={plus} />
           </button>
         </div>
         <TaskList tasks={tasks} onSetTasks={setOutTasks} />
