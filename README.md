@@ -10,7 +10,13 @@
 
 ---
 
-### To view the project
+### To view page
+
+[Clique aqui 🔗](https://raimones-to-do.vercel.app/)
+
+----
+
+### To modify the project
 
 ° Download or clone the repository on your machine.
 
@@ -20,7 +26,7 @@
 
 or
 
-`$ yarn`
+`$ yarn add`
 
 Then:
 
