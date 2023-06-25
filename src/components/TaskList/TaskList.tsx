@@ -17,6 +17,7 @@ export function TaskList({ tasks, onSetTasks }: TaskListProps) {
         <Task
           key={task.id}
           id={task.id}
+          checked={task.checked}
           content={task.content}
           onDeleteTask={deleteTask}
           onUpdateStatus={updateTaskStatus}
@@ -24,7 +25,7 @@ export function TaskList({ tasks, onSetTasks }: TaskListProps) {
       ));
   }
 
-  function updateTaskStatus(id: string, status: boolean) {
+  function updateTaskStatus(id: string | undefined, status: boolean) {
     onSetTasks(
       tasks.map((task) => {
         if (task.id === id) {
