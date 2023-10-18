@@ -47,6 +47,10 @@
   margin: auto;
 }
 
+.form a {
+  color: var(--purple);
+}
+
 .login input {
   background-color: var(--gray500);
   color: var(--gray100);

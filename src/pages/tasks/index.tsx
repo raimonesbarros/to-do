@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import plus from "../../assets/plus.svg";
 import rocket from "../../assets/rocket.svg";
@@ -7,18 +8,20 @@ import styles from "./tasks.module.css";
 
 export interface TaskType {
   id: string;
-  checked: boolean;
   content: string;
+  checked: boolean;
+  createdAt: string;
+  userId: string;
 }
 
 export function TasksPage() {
+  const navigate = useNavigate();
   const [writeNewTask, setWriteNewTask] = useState("");
+
   const [tasks, setTasks] = useState<TaskType[]>(() => {
-    const storedTasks = localStorage.getItem("@todo1.0.0");
+    const storedTasks = localStorage.getItem("@todo2.0.0");
     if (storedTasks) return JSON.parse(storedTasks);
-    else {
-      return [];
-    }
+    return [];
   });
 
   function handleWriteTask(event: ChangeEvent<HTMLInputElement>) {
@@ -27,11 +30,13 @@ export function TasksPage() {
   }
 
   function handleAddNewTask() {
-    const id = uuidv4();
+    const createdAt = new Date().toISOString();
     const newTask = {
-      id: id,
-      checked: false,
+      id: uuidv4(),
       content: writeNewTask,
+      checked: false,
+      createdAt,
+      userId: uuidv4(),
     };
 
     setTasks((preState) => [...preState, newTask]);
@@ -42,17 +47,24 @@ export function TasksPage() {
     setTasks(value);
   }
 
+  function goToLogin() {
+    navigate("/login");
+  }
+
   const isValidTask = writeNewTask.length < 1;
 
   useEffect(() => {
     const stateJSON = JSON.stringify(tasks);
 
-    localStorage.setItem("@todo1.0.0", stateJSON);
+    localStorage.setItem("@todo2.0.0", stateJSON);
   }, [tasks]);
 
   return (
     <div className={styles.app}>
       <header className={styles.header}>
+        <button type="button" onClick={goToLogin}>
+          Entrar
+        </button>
         <img src={rocket} />
         <h1>
           to<span>do</span>

@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { HomePage } from "./pages/home";
 import { LoginPage } from "./pages/login";
 import { RegisterPage } from "./pages/register";
 import { TasksPage } from "./pages/tasks";
@@ -7,10 +6,9 @@ import { TasksPage } from "./pages/tasks";
 export function Router() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<TasksPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/tasks" element={<TasksPage />} />
     </Routes>
   );
 }

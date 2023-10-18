@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import rocket from "../../assets/rocket.svg";
 import styles from "./login.module.css";
 
@@ -32,6 +33,7 @@ export function LoginPage() {
             {...register("password")}
             required
           />
+          <Link to={"/register"}>Não possui conta? Fazer cadastro!</Link>
           <button type="submit" onSubmit={handleSubmit(handleLogin)}>
             Entrar
           </button>
