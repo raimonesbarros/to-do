@@ -1,6 +1,17 @@
+import { useForm } from "react-hook-form";
+import rocket from "../../assets/rocket.svg";
+import styles from "./login.module.css";
+
 export function LoginPage() {
+  const { register, handleSubmit, reset } = useForm();
+
+  function handleLogin() {
+    reset();
+    throw new Error("Function not implemented.");
+  }
+
   return (
-    <div className={styles.app}>
+    <div className={styles.login}>
       <header className={styles.header}>
         <img src={rocket} />
         <h1>
@@ -8,24 +19,23 @@ export function LoginPage() {
         </h1>
       </header>
       <main>
-        <div className={styles.task}>
+        <form className={styles.form}>
           <input
-            type="text"
-            placeholder="Adicione uma nova tarefa"
-            onChange={handleWriteTask}
-            value={writeNewTask}
+            type="email"
+            placeholder="E-mail"
+            {...register("email")}
             required
           />
-          <button
-            type="submit"
-            onClick={handleAddNewTask}
-            disabled={isValidTask}
-          >
-            Criar
-            <img src={plus} />
+          <input
+            type="password"
+            placeholder="Senha"
+            {...register("password")}
+            required
+          />
+          <button type="submit" onSubmit={handleSubmit(handleLogin)}>
+            Entrar
           </button>
-        </div>
-        <TaskList tasks={tasks} onSetTasks={setOutTasks} />
+        </form>
       </main>
     </div>
   );
