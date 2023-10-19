@@ -1,16 +1,19 @@
 import { FieldValues, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authenticate } from "../../api/authenticate";
 import rocket from "../../assets/rocket.svg";
 import styles from "./login.module.css";
 
 export function LoginPage() {
+  const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
 
-  function handleLogin(data: FieldValues) {
+  async function handleLogin(data: FieldValues) {
     const { email, password } = data;
     try {
-      authenticate({ email, password });
+      const token = await authenticate({ email, password });
+      localStorage.setItem("TOKEN", token);
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -39,7 +42,7 @@ export function LoginPage() {
             {...register("password")}
             required
           />
-          <Link to={"/register"}>Não possui conta? Fazer cadastro!</Link>
+          <Link to={"/register"}>Não possui conta? Faça o cadastro!</Link>
           <button type="submit">Entrar</button>
         </form>
       </main>

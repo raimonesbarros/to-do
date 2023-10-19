@@ -8,5 +8,5 @@ export type UserSession = {
 export async function authenticate(data: UserSession) {
   const response = await request.post("/sessions", data);
 
-  return response.data;
+  return response.data.access_token;
 }

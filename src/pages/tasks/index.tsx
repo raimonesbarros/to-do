@@ -44,7 +44,9 @@ export function TasksPage() {
 
     await createTask(newTask);
 
-    setTasks((preState) => [...preState, newTask]);
+    const token = localStorage.getItem("TOKEN");
+    token && fetchTasks(token);
+
     setWriteNewTask("");
   }
 
@@ -52,29 +54,40 @@ export function TasksPage() {
     setTasks(value);
   }
 
-  function goToLogin() {
+  function handleLogOut() {
+    setTasks([]);
+    localStorage.removeItem("TOKEN");
     navigate("/login");
   }
 
   const isValidTask = writeNewTask.length < 1;
 
-  const fetchTasks = async () => {
-    const storedTasks = await getTasks();
-    if (storedTasks) setTasks(storedTasks);
+  const fetchTasks = async (token: string) => {
+    const storedTasks = await getTasks(token);
+    const tasks = [
+      ...storedTasks.tasks.not_checked,
+      ...storedTasks.tasks.checked,
+    ];
+    if (storedTasks) setTasks(tasks);
     return [];
   };
   useEffect(() => {
-    fetchTasks();
-    // const stateJSON = JSON.stringify(tasks);
+    const token = localStorage.getItem("TOKEN");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
-    // localStorage.setItem("@todo2.0.0", stateJSON);
-  }, [tasks]);
+  useEffect(() => {
+    const token = localStorage.getItem("TOKEN");
+    if (token) fetchTasks(token);
+  }, []);
 
   return (
     <div className={styles.app}>
       <header className={styles.header}>
-        <button type="button" onClick={goToLogin}>
-          Entrar
+        <button type="button" onClick={handleLogOut}>
+          Sair
         </button>
         <img src={rocket} />
         <h1>

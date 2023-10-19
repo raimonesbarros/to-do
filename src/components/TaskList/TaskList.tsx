@@ -1,6 +1,7 @@
 import { EmptyTask } from "../EmptyTask/EmptyTask.tsx";
 import { Task } from "../Task/Task.tsx";
 
+import { Tasks } from "../../api/getTasks.ts";
 import { TaskType } from "../../pages/tasks/index.tsx";
 import styles from "./TaskList.module.css";
 
@@ -25,16 +26,11 @@ export function TaskList({ tasks, onSetTasks }: TaskListProps) {
       ));
   }
 
-  function updateTaskStatus(id: string | undefined, status: boolean) {
-    onSetTasks(
-      tasks.map((task) => {
-        if (task.id === id) {
-          return { ...task, checked: status };
-        } else {
-          return task;
-        }
-      })
-    );
+  function updateTaskStatus(tasks: Tasks | undefined) {
+    if (tasks) {
+      const newTasks = [...tasks.tasks.not_checked, ...tasks.tasks.checked];
+      onSetTasks(newTasks);
+    }
   }
 
   function taskQttyFinished() {

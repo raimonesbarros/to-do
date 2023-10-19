@@ -1,19 +1,25 @@
 import { FieldValues, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { createAccounts } from "../../api/create-accounts";
 import rocket from "../../assets/rocket.svg";
 import styles from "./register.module.css";
 
 export function RegisterPage() {
+  const navigate = useNavigate();
   const { register, handleSubmit, reset, watch } = useForm();
 
-  function handleRegister(data: FieldValues) {
+  async function handleRegister(data: FieldValues) {
     const { name, email, password } = data;
-    createAccounts({
+    const status = await createAccounts({
       name,
       email,
       password,
     });
-    reset();
+
+    if (status === 201) {
+      reset();
+      navigate("/login");
+    }
   }
 
   const pass = watch("password");
