@@ -1,13 +1,19 @@
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
+import { createAccounts } from "../../api/create-accounts";
 import rocket from "../../assets/rocket.svg";
 import styles from "./register.module.css";
 
 export function RegisterPage() {
   const { register, handleSubmit, reset, watch } = useForm();
 
-  function handleRegister() {
+  function handleRegister(data: FieldValues) {
+    const { name, email, password } = data;
+    createAccounts({
+      name,
+      email,
+      password,
+    });
     reset();
-    throw new Error("Function not implemented.");
   }
 
   const pass = watch("password");
@@ -24,7 +30,13 @@ export function RegisterPage() {
         </h1>
       </header>
       <main>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit(handleRegister)}>
+          <input
+            type="text"
+            placeholder="Nome"
+            {...register("name")}
+            required
+          />
           <input
             type="email"
             placeholder="E-mail"
@@ -45,11 +57,7 @@ export function RegisterPage() {
             minLength={8}
             required
           />
-          <button
-            type="submit"
-            onSubmit={handleSubmit(handleRegister)}
-            disabled={!hasMatchPass}
-          >
+          <button type="submit" disabled={!hasMatchPass}>
             Enviar
           </button>
         </form>

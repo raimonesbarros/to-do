@@ -1,14 +1,20 @@
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { authenticate } from "../../api/authenticate";
 import rocket from "../../assets/rocket.svg";
 import styles from "./login.module.css";
 
 export function LoginPage() {
   const { register, handleSubmit, reset } = useForm();
 
-  function handleLogin() {
+  function handleLogin(data: FieldValues) {
+    const { email, password } = data;
+    try {
+      authenticate({ email, password });
+    } catch (err) {
+      console.log(err);
+    }
     reset();
-    throw new Error("Function not implemented.");
   }
 
   return (
@@ -20,7 +26,7 @@ export function LoginPage() {
         </h1>
       </header>
       <main>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit(handleLogin)}>
           <input
             type="email"
             placeholder="E-mail"
@@ -34,9 +40,7 @@ export function LoginPage() {
             required
           />
           <Link to={"/register"}>Não possui conta? Fazer cadastro!</Link>
-          <button type="submit" onSubmit={handleSubmit(handleLogin)}>
-            Entrar
-          </button>
+          <button type="submit">Entrar</button>
         </form>
       </main>
     </div>

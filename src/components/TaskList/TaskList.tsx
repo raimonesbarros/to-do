@@ -1,7 +1,7 @@
-import { Task } from "../Task/Task.tsx";
 import { EmptyTask } from "../EmptyTask/EmptyTask.tsx";
-import { TaskType } from "../../App.tsx";
+import { Task } from "../Task/Task.tsx";
 
+import { TaskType } from "../../pages/tasks/index.tsx";
 import styles from "./TaskList.module.css";
 
 interface TaskListProps {
